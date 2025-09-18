@@ -15,6 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE product SET stock = stock + :delta, updated_at = now() WHERE id = CAST(:id AS uuid) AND (stock + :delta) >= 0", nativeQuery = true)
+    @Query(value = "UPDATE product SET stock = stock + :delta, updated_at = now() WHERE id = CAST(:id AS uuid) AND (stock + :delta) >= 0", nativeQuery = true)
     int adjustStockNative(@Param("id") String id, @Param("delta") int delta);
 }
