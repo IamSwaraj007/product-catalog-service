@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-catalog-config
+data:
+  application.yml: |
+    spring:
+      datasource:
+        url: jdbc:postgresql://postgres:5432/catalog
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWORD}
+      jpa:
+        hibernate:
+          ddl-auto: validate
+        properties:
+          hibernate:
+            format_sql: true
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: health,info,prometheus
+    server:
+      port: 8080
+    springdoc:
+      api-docs:
+        path: /v3/api-docs
+      swagger-ui:
+        path: /swagger-ui.html
+
