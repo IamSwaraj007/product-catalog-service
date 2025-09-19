@@ -24,27 +24,15 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: product-catalog-secret
-                  key: DB_USERNAME
+                  key: db-username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: product-catalog-secret
-                  key: DB_PASSWORD
+                  key: db-password
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
       volumes:
         - name: postgres-storage
-          emptyDir: {}   # ✅ Use PersistentVolumeClaim in production
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-spec:
-  type: ClusterIP
-  selector:
-    app: postgres
-  ports:
-    - port: 5432
-      targetPort: 5432
+          emptyDir: {}   # Use PersistentVolumeClaim in production
