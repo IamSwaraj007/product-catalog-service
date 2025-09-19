@@ -37,9 +37,19 @@ spec:
               port: 8080
             initialDelaySeconds: 30
             periodSeconds: 30
-          envFrom:
-            - secretRef:
-                name: product-catalog-secret
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: product-catalog-secret
+                  key: db-username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: product-catalog-secret
+                  key: db-password
+            - name: SPRING_CONFIG_LOCATION
+              value: classpath:/application.yml,file:/config/application.yml
           volumeMounts:
             - name: app-config
               mountPath: /config
