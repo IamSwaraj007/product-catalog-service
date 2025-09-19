@@ -12,6 +12,8 @@ spec:
       labels:
         app: product-catalog
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: controlplane
       containers:
         - name: product-catalog
           image: product-catalog-service:latest
@@ -49,7 +51,7 @@ spec:
                   name: product-catalog-secret
                   key: db-password
             - name: SPRING_CONFIG_LOCATION
-              value: classpath:/application.yml,file:/config/application.yml
+              value: file:/config/application.yml
           volumeMounts:
             - name: app-config
               mountPath: /config
