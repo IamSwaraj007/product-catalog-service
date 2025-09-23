@@ -37,9 +37,21 @@ public class ProductService {
         return repo.findAll().stream().map(this::toDto).collect(Collectors.toList());
     }
 
+    public Product update(Product product) {
+    return repo.save(product);
+    }
+
     @Transactional
     public boolean adjustStock(UUID id, int delta) {
         int updated = repo.adjustStockNative(id.toString(), delta);
         return updated > 0;
     }
+
+    public boolean delete(UUID id) {
+    if (repo.existsById(id)) {
+        repo.deleteById(id);
+        return true;
+    }
+    return false;
+}
 }
