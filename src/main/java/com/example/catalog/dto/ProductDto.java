@@ -1,14 +1,27 @@
 package com.example.catalog.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@Schema(description = "Product information")
 public class ProductDto {
+    @Schema(description = "Product unique identifier", example = "123e4567-e89b-12d3-a456-426614174000")
     private UUID id;
+    
+    @Schema(description = "Product SKU (Stock Keeping Unit)", example = "LAPTOP-001", required = true)
     private String sku;
+    
+    @Schema(description = "Product name", example = "Gaming Laptop", required = true)
     private String name;
+    
+    @Schema(description = "Product description", example = "High-performance gaming laptop with RGB lighting")
     private String description;
+    
+    @Schema(description = "Product price", example = "1299.99", required = true)
     private BigDecimal price;
+    
+    @Schema(description = "Available stock quantity", example = "50")
     private Integer stock;
 
     // getters and setters

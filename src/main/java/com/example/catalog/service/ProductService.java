@@ -33,6 +33,8 @@ public class ProductService {
 
     public Optional<Product> findById(UUID id) { return repo.findById(id); }
 
+    public Optional<Product> findBySku(String sku) { return repo.findBySku(sku); }
+
     public List<ProductDto> listAll() {
         return repo.findAll().stream().map(this::toDto).collect(Collectors.toList());
     }
